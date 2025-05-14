@@ -1,7 +1,3 @@
-Отлично! Вот английская версия вашего `README.md` в профессиональном стиле:
-
----
-
 # 📚 Library Management System
 
 A multi-layered Java Spring Boot application for managing books, authors, and readers in a library. The project demonstrates clean architecture principles with a focus on extensibility and maintainability.
