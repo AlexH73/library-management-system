@@ -1,101 +1,120 @@
-# 📚 Library Management System
+## 📚 Library Management System
 
-A multi-layered Java Spring Boot application for managing books, authors, and readers in a library. The project demonstrates clean architecture principles with a focus on extensibility and maintainability.
+Проект по управлению библиотекой с использованием **Spring Boot**, **PostgreSQL** и **Docker**.
 
 ---
 
-## 📦 Technologies
+## 📦 Технологии
 
-* Java 17+ (e.g., Java 23)
-* Spring Boot 3.1.0
+* Java 17+
+* Spring Boot 3.x
 * Spring Data JPA
-* PostgreSQL (production)
-* H2 Database (development profile)
-* Lombok
-* JUnit 5, Mockito
+* PostgreSQL (в Docker)
+* H2 (Dev-Mode)
+* Maven
 
 ---
 
-## ✨ Features
+## 📂 Структура проекта
 
-* Manage books, authors, and readers
-* Register new readers
-* Data persistence with PostgreSQL (or H2 for development)
-* Service layer with business logic separation
-* Ready to extend with REST API endpoints
+```
+library-management-system/
+├── src/
+│   ├── main/
+│   │   ├── java/com/example/library/
+│   │   └── resources/
+│   └── test/
+│       ├── java/com/example/library/
+│       └── resources/
+├── docker-compose.yml
+├── pom.xml
+└── README.md
+```
 
 ---
 
-## 🧱 Domain Model Structure
+## 🐳 Как запустить PostgreSQL через Docker
 
-* `Author`
-* `Book`
-* `Reader`
-
----
-
-## 🛠 Setup Instructions
-
-1. Ensure you have Java 17+ and Maven installed.
-2. (Optional) Install Docker and Docker Compose for PostgreSQL.
-3. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/library-management-system.git
-   cd library-management-system
-   ```
-4. Start PostgreSQL via Docker:
+1. Откройте терминал в корне проекта:
 
    ```bash
    docker compose up -d
-   # or for legacy plugin:
-   docker-compose up -d
    ```
-5. Configure database credentials in `src/main/resources/application.properties`.
-6. Build the project:
+2. Проверка контейнера:
 
    ```bash
-   mvn clean install
+   docker ps
    ```
-7. Run the application:
 
-    * **Production profile (PostgreSQL, minimal logging):**
-
-      ```bash
-      mvn spring-boot:run -Dspring-boot.run.profiles=prod
-      ```
-    * **Development profile (H2 database, full logging):**
-
-      ```bash
-      mvn spring-boot:run -Dspring-boot.run.profiles=dev
-      ```
+> ✅ PostgreSQL будет доступен по адресу `localhost:5432` (логин/пароль — postgres).
 
 ---
 
-## ✅ Running Tests
+## ⚙️ Конфигурация приложения
 
-```bash
-mvn test
+### ▶️ Production (PostgreSQL)
+
+**application.properties:**
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/librarydb
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 ```
 
-Includes:
+### 🧪 Development (H2 in-memory)
 
-* Unit tests for service and repository layers (`src/test`)
-* Using JUnit 5 and Mockito frameworks
+**application-dev.properties:**
 
----
-
-## 📦 Building JAR
-
-```bash
-mvn clean package
+```properties
+spring.datasource.url=jdbc:h2:mem:librarydb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```
 
-The final JAR will be located at: `target/library-0.0.1-SNAPSHOT.jar`
+---
+
+## 🏁 Сборка и запуск проекта
+
+### ✅ Сборка
+
+```bash
+mvn clean install
+```
+
+### ✅ Запуск (Production, PostgreSQL)
+
+```bash
+mvn spring-boot:run
+```
+
+### ✅ Запуск (Development, H2)
+
+```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+```
 
 ---
 
-## 👨‍💻 Author
+## 🧹 Как отключить логотип Spring Boot и INFO
 
-* **AlexH73:** [GitHub](https://github.com/AlexH73) — Developer, Architecture & Documentation
+В `application.properties` добавьте:
+
+```properties
+spring.main.banner-mode=off
+logging.level.root=WARN
+```
+
+---
+
+## 👥 Авторы
+
+* [AlexH73](https://github.com/AlexH73) — автор проекта
+* 
+
 
