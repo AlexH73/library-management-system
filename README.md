@@ -114,7 +114,7 @@ logging.level.root=WARN
 
 ## 👥 Авторы
 
-* [AlexH73](https://github.com/AlexH73) — автор проекта
+**AlexH73:** [GitHub](https://github.com/AlexH73) — разработчик проекта
 * 
 
 
